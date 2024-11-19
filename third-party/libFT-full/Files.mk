@@ -1,0 +1,35 @@
+FILES	=																	\
+	src/ft_printf/ft_printf src/ft_printf/printers/ft_print_c				\
+	src/ft_printf/printers/ft_print_d src/ft_printf/printers/ft_print_p		\
+	src/ft_printf/printers/ft_print_s src/ft_printf/printers/ft_print_u		\
+	src/ft_printf/printers/ft_print_x src/get_next_line/get_next_line		\
+		src/ft_printf/ft_vprintf src/ft_printf/vprinters/ft_vprint_c		\
+	src/ft_printf/vprinters/ft_vprint_d src/ft_printf/vprinters/ft_vprint_p	\
+	src/ft_printf/vprinters/ft_vprint_s src/ft_printf/vprinters/ft_vprint_u	\
+	src/ft_printf/vprinters/ft_vprint_x										\
+	src/get_next_line/get_next_line_utils src/libft/ft_is/ft_isalnum		\
+	src/libft/ft_is/ft_isalpha src/libft/ft_is/ft_isascii					\
+	src/libft/ft_is/ft_isdigit src/libft/ft_is/ft_isprint					\
+	src/libft/ft_is/ft_iswhitespace src/libft/ft_lst/ft_lstadd_back			\
+	src/libft/ft_lst/ft_lstadd_front src/libft/ft_lst/ft_lstclear			\
+	src/libft/ft_lst/ft_lstdelone src/libft/ft_lst/ft_lstiter				\
+	src/libft/ft_lst/ft_lstlast src/libft/ft_lst/ft_lstmap					\
+	src/libft/ft_lst/ft_lstnew src/libft/ft_lst/ft_lstsize					\
+	src/libft/ft_mem/ft_bzero src/libft/ft_mem/ft_calloc					\
+	src/libft/ft_mem/ft_memchr src/libft/ft_mem/ft_memcmp					\
+	src/libft/ft_mem/ft_memcpy src/libft/ft_mem/ft_memmove					\
+	src/libft/ft_mem/ft_memset src/libft/ft_put/ft_putchar					\
+	src/libft/ft_put/ft_putchar_fd src/libft/ft_put/ft_putendl_fd			\
+	src/libft/ft_put/ft_putnbr_fd src/libft/ft_put/ft_putndl				\
+	src/libft/ft_put/ft_putstr src/libft/ft_put/ft_putstr_fd				\
+	src/libft/ft_str/ft_split src/libft/ft_str/ft_strchr					\
+	src/libft/ft_str/ft_strdup src/libft/ft_str/ft_striteri					\
+	src/libft/ft_str/ft_strjoin src/libft/ft_str/ft_strlcat					\
+	src/libft/ft_str/ft_strlcpy src/libft/ft_str/ft_strlen					\
+	src/libft/ft_str/ft_strmapi src/libft/ft_str/ft_strncmp					\
+	src/libft/ft_str/ft_strnstr src/libft/ft_str/ft_strrchr					\
+	src/libft/ft_str/ft_strstr src/libft/ft_str/ft_strtrim					\
+	src/libft/ft_str/ft_substr src/libft/ft_to/ft_atoi						\
+	src/libft/ft_to/ft_itoa src/libft/ft_to/ft_tolower						\
+	src/libft/ft_to/ft_toupper tests/gnl_test tests/libft_test				\
+	tests/libft_test_old tests/printf_test									\

@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/18 09:55:53 by jcheron           #+#    #+#             */
+/*   Updated: 2024/11/19 13:55:08 by jcheron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PIPEX_H
+# define PIPEX_H
+
+# include <unistd.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include "libft.h"
+# include "ft_printf.h"
+# include "ft_vprintf.h"
+# include <fcntl.h>
+
+# define ERROR_MISSING_ARG "missing argument"
+# define ERROR_INT "internal error"
+# define ERROR_CMD_NOT_FOUND "%s: command not found: %s\n"
+# define HEREDOC "here_doc"
+
+# define RET_ERR 1
+# define RET_OK 0
+
+# define PIPE_READ 0
+# define PIPE_WRITE 1
+
+# define BUFFER_SIZE 4096
+
+typedef struct s_args
+{
+	int		intput_fd;
+	int		input_flags;
+	int		output_fd;
+	int		null_fd;
+	char	**start;
+	char	**end;
+	char	**paths;
+	char	**envp;
+}	t_args;
+
+
+// checkers.c
+int		check_files(char *file1);
+int		pipex_check_ac(int ac);
+void	get_paths(char **env);
+char	*find_exec(char *cmd, char **env);
+
+// errs.c
+void	pipex_err(char *msg);
+int		pipex_err_file(char *msg, char *filename);
+void	pipex_err_file_no_exit(char *msg, char *filename);
+
+// read_cmd.c
+char	*read_cmd(char *cmd);
+
+#endif
