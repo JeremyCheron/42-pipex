@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:55:53 by jcheron           #+#    #+#             */
-/*   Updated: 2024/11/19 13:55:08 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/04 18:38:26 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@
 # include "ft_vprintf.h"
 # include <fcntl.h>
 
+# define USAGE "Usage: ./pipex file1 cmd1 cmd2 file2"
 # define ERROR_MISSING_ARG "missing argument"
 # define ERROR_INT "internal error"
-# define ERROR_CMD_NOT_FOUND "%s: command not found: %s\n"
+# define ERROR_CMD_NOT_FOUND "command not found"
 # define HEREDOC "here_doc"
+# define ERROR_ALLOC "memory allocation failed"
+# define ERROR_FORK "fork failed"
+# define ERROR_DUP2 "dup2 failed"
+# define ERROR_EXEC "execvp failed"
+# define ERROR_PIPE "pipe creation failed"
+# define ERROR_OPEN_INPUT "can't open input file"
+# define ERROR_OPEN_OUTPUT "can't open output file"
 
 # define RET_ERR 1
 # define RET_OK 0
@@ -61,6 +69,6 @@ int		pipex_err_file(char *msg, char *filename);
 void	pipex_err_file_no_exit(char *msg, char *filename);
 
 // read_cmd.c
-char	*read_cmd(char *cmd);
+void	execute_cmd(char *cmd, int input_fd, int output_fd, char **envp);
 
 #endif

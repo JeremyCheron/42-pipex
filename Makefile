@@ -6,7 +6,7 @@
 #    By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 08:20:00 by jcheron           #+#    #+#              #
-#    Updated: 2024/11/18 15:15:07 by jcheron          ###   ########.fr        #
+#    Updated: 2024/12/04 18:56:07 by jcheron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LFLAGS			=									\
 					-L$(LIB_FT_PATH)				\
 					-lftfull						\
 
-FILES			=	main checkers errs read_cmd
+FILES			=	main checkers errs read_cmd pipex
 
 SRCS			=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(FILES)))
 

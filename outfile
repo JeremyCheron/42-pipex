@@ -1,1 +1,4 @@
-10
+-rw-r--r-- 1 jcheron 2024_le-havre  1893 Dec  4 18:56 Makefile
+-rw-r--r-- 1 jcheron 2024_le-havre     7 Nov 19 08:06 infile
+-rw-r--r-- 1 jcheron 2024_le-havre     0 Dec  4 18:59 outfile
+-rw-r--r-- 1 jcheron 2024_le-havre   284 Dec  4 16:33 test_file.txt
