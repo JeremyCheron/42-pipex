@@ -6,13 +6,13 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:12:51 by jcheron           #+#    #+#             */
-/*   Updated: 2024/11/19 08:01:18 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/11/27 15:50:09 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*read_cmd(char *cmd)
-{
-	return (ft_strjoin(BIN_PATH, cmd));
-}
+// char	*read_cmd(char *cmd)
+// {
+// 	return (ft_strjoin(BIN_PATH, cmd));
+// }
