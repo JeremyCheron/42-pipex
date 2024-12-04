@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:43:10 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/04 18:59:42 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/04 19:08:21 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	open_output(char *filename)
 	return (fd);
 }
 
-void	handle_pipes(int ac, char **av, int *infile, int *outfile, char **envp)
+void	handle_pipes(int ac, char **av, int *files, char **envp)
 {
 	int	pipe_fd[2];
 	int	i;
@@ -52,16 +52,17 @@ void	handle_pipes(int ac, char **av, int *infile, int *outfile, char **envp)
 	{
 		if (pipe(pipe_fd) == -1)
 			pipex_err(ERROR_PIPE);
-		execute_cmd(av[i], *infile, pipe_fd[1], envp);
+		execute_cmd(av[i], files[0], pipe_fd[1], envp);
 		close(pipe_fd[1]);
-		*infile = pipe_fd[0];
+		files[0] = pipe_fd[0];
 		i++;
 	}
-	execute_cmd(av[ac - 2], *infile, *outfile, envp);
+	execute_cmd(av[ac - 2], files[0], files[1], envp);
 }
 
 int	main(int ac, char **av, char **envp)
 {
+	int	files[2];
 	int	infile;
 	int	outfile;
 	int	status;
@@ -70,7 +71,10 @@ int	main(int ac, char **av, char **envp)
 		return (ft_vprintf(STDERR_FILENO, USAGE), 1);
 	infile = open_input(av[1]);
 	outfile = open_output(av[ac - 1]);
-	handle_pipes(ac, av, &infile, &outfile, envp);
+
+	files[0] = infile;
+	files[1] = outfile;
+	handle_pipes(ac, av, files, envp);
 	close(outfile);
 	while (--ac > 3)
 		wait(&status);
