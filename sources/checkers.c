@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:55:32 by jcheron           #+#    #+#             */
-/*   Updated: 2024/11/19 10:30:15 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:20:42 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ int	check_files(char *file1)
 	return (1);
 }
 
-char	*find_exec(char *cmd, char **env)
+char	**get_allpaths(char **env)
 {
 	char	*path;
 	char	**all_paths;
-	char	*full_path;
-	int		i;
-	char	*temp;
 
 	while (*env && ft_strncmp(*env, "PATH=", 5) != 0)
 		env++;
@@ -48,6 +45,19 @@ char	*find_exec(char *cmd, char **env)
 		return (NULL);
 	path = *env + 5;
 	all_paths = ft_split(path, ':');
+	if (!all_paths)
+		return (NULL);
+	return (all_paths);
+}
+
+char	*find_exec(char *cmd, char **env)
+{
+	char	**all_paths;
+	char	*full_path;
+	int		i;
+	char	*temp;
+
+	all_paths = get_allpaths(env);
 	if (!all_paths)
 		return (NULL);
 	i = 0;
@@ -58,13 +68,9 @@ char	*find_exec(char *cmd, char **env)
 		full_path = ft_strjoin(full_path, cmd);
 		free(temp);
 		if (access(full_path, X_OK) == 0)
-		{
-			ft_free_split(all_paths);
-			return (full_path);
-		}
+			return (ft_free_split(all_paths), full_path);
 		free(full_path);
 		i++;
 	}
-	ft_free_split(all_paths);
-	return (NULL);
+	return (ft_free_split(all_paths), NULL);
 }

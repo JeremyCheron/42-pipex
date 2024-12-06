@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 08:00:07 by jcheron           #+#    #+#             */
-/*   Updated: 2024/11/19 11:44:18 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:21:21 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ static size_t	ft_countwords(char const *s, char c)
 	return (count);
 }
 
-void ft_free_split(char **split)
+void	ft_free_split(char **split)
 {
-    int i = 0;
-    while (split[i])
-    {
-        free(split[i]);
-        i++;
-    }
-    free(split);
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 // void	ft_free_split(char **split)

@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:43:10 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/04 19:08:21 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:21:35 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int ac, char **av, char **envp)
 		return (ft_vprintf(STDERR_FILENO, USAGE), 1);
 	infile = open_input(av[1]);
 	outfile = open_output(av[ac - 1]);
-
 	files[0] = infile;
 	files[1] = outfile;
 	handle_pipes(ac, av, files, envp);

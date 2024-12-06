@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:55:53 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/04 18:38:26 by jcheron          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:21:47 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_args
 	char	**paths;
 	char	**envp;
 }	t_args;
-
 
 // checkers.c
 int		check_files(char *file1);
