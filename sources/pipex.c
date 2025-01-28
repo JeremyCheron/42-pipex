@@ -6,13 +6,14 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:43:10 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/06 10:21:35 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 09:11:06 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	open_input(char *filename)
+int	open_input(
+			char *filename)
 {
 	int	fd;
 
@@ -27,22 +28,27 @@ int	open_input(char *filename)
 	return (fd);
 }
 
-int	open_output(char *filename)
+int	open_output(
+			char *filename)
 {
 	int	fd;
 
+	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (access(filename, W_OK) == -1)
 	{
 		pipex_err_file(ERROR_OPEN_OUTPUT, filename);
 		return (-1);
 	}
-	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		pipex_err_file(ERROR_OPEN_OUTPUT, filename);
 	return (fd);
 }
 
-void	handle_pipes(int ac, char **av, int *files, char **envp)
+void	handle_pipes(
+			int ac,
+			char **av,
+			int *files,
+			char **envp)
 {
 	int	pipe_fd[2];
 	int	i;
@@ -52,15 +58,19 @@ void	handle_pipes(int ac, char **av, int *files, char **envp)
 	{
 		if (pipe(pipe_fd) == -1)
 			pipex_err(ERROR_PIPE);
-		execute_cmd(av[i], files[0], pipe_fd[1], envp);
-		close(pipe_fd[1]);
-		files[0] = pipe_fd[0];
+		execute_cmd(av[i], files[0], pipe_fd[PIPE_WRITE], envp);
+		close(pipe_fd[PIPE_WRITE]);
+		files[0] = pipe_fd[PIPE_READ];
 		i++;
 	}
 	execute_cmd(av[ac - 2], files[0], files[1], envp);
+	close(files[0]);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(
+			int ac,
+			char **av,
+			char **envp)
 {
 	int	files[2];
 	int	infile;
@@ -75,6 +85,7 @@ int	main(int ac, char **av, char **envp)
 	files[1] = outfile;
 	handle_pipes(ac, av, files, envp);
 	close(outfile);
+	close(infile);
 	while (--ac > 3)
 		wait(&status);
 	return (0);

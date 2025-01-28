@@ -6,25 +6,32 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:12:51 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/04 18:29:45 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 09:11:31 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	_ft_free_split(char **args)
+static int	_ft_free_split(
+			char **args)
 {
 	ft_free_split(args);
 	return (1);
 }
 
-static void	_closefds(int fd1, int fd2)
+void	_closefds(
+			int fd1,
+			int fd2)
 {
 	close(fd1);
 	close(fd2);
 }
 
-static void	pid_error(int input_fd, int output_fd, char *exec, char **args)
+static void	execute_child_process(
+			int input_fd,
+			int output_fd,
+			char *exec,
+			char **args)
 {
 	if ((dup2(input_fd, STDIN_FILENO) == -1)
 		|| (dup2(output_fd, STDOUT_FILENO) == -1))
@@ -37,7 +44,11 @@ static void	pid_error(int input_fd, int output_fd, char *exec, char **args)
 	}
 }
 
-void	execute_cmd(char *cmd, int input_fd, int output_fd, char **envp)
+void	execute_cmd(
+			char *cmd,
+			int input_fd,
+			int output_fd,
+			char **envp)
 {
 	pid_t	pid;
 	char	*exec;
@@ -46,19 +57,22 @@ void	execute_cmd(char *cmd, int input_fd, int output_fd, char **envp)
 	args = ft_split(cmd, ' ');
 	if (!args)
 		pipex_err(ERROR_ALLOC);
-	exec = find_exec(args[0], envp);
-	if (!exec)
+	if (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0)
+		exec = ft_strdup(args[0]);
+	else
 	{
-		pipex_err_file(ERROR_CMD_NOT_FOUND, args[0]);
-		exit (_ft_free_split(args));
+		exec = find_exec(args[0], envp);
+		if (!exec)
+		{
+			pipex_err_file(ERROR_CMD_NOT_FOUND, args[0]);
+			exit (_ft_free_split(args));
+		}
 	}
 	pid = fork();
 	if (pid == -1)
 		pipex_err(ERROR_FORK);
 	else if (pid == 0)
-	{
-		pid_error(input_fd, output_fd, exec, args);
-	}
+		execute_child_process(input_fd, output_fd, exec, args);
 	free(exec);
 	ft_free_split(args);
 }

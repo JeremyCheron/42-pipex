@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:55:53 by jcheron           #+#    #+#             */
-/*   Updated: 2024/12/06 10:21:47 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 09:10:14 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,40 @@ typedef struct s_args
 }	t_args;
 
 // checkers.c
-int		check_files(char *file1);
-int		pipex_check_ac(int ac);
-void	get_paths(char **env);
-char	*find_exec(char *cmd, char **env);
+int		check_files(
+			char *file1);
+
+int		pipex_check_ac(
+			int ac);
+
+void	get_paths(
+			char **env);
+
+char	*find_exec(
+			char *cmd,
+			char **env);
 
 // errs.c
-void	pipex_err(char *msg);
-int		pipex_err_file(char *msg, char *filename);
-void	pipex_err_file_no_exit(char *msg, char *filename);
+void	pipex_err(
+			char *msg);
+
+int		pipex_err_file(
+			char *msg,
+			char *filename);
+
+void	pipex_err_file_no_exit(
+			char *msg,
+			char *filename);
 
 // read_cmd.c
-void	execute_cmd(char *cmd, int input_fd, int output_fd, char **envp);
+void	execute_cmd(
+			char *cmd,
+			int input_fd,
+			int output_fd,
+			char **envp);
+
+void	_closefds(
+			int fd1,
+			int fd2);
 
 #endif
