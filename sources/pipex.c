@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:43:10 by jcheron           #+#    #+#             */
-/*   Updated: 2025/01/28 09:11:06 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:18:36 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	open_output(
 	int	fd;
 
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (access(filename, W_OK) == -1)
+	if (fd == -1)
 	{
 		pipex_err_file(ERROR_OPEN_OUTPUT, filename);
 		return (-1);
@@ -58,7 +58,13 @@ void	handle_pipes(
 	{
 		if (pipe(pipe_fd) == -1)
 			pipex_err(ERROR_PIPE);
-		execute_cmd(av[i], files[0], pipe_fd[PIPE_WRITE], envp);
+		if (!execute_cmd(av[i], files[0], pipe_fd[PIPE_WRITE], envp))
+		{
+			close(pipe_fd[PIPE_READ]);
+			close(files[1]);
+			exit(1);
+		}
+
 		close(pipe_fd[PIPE_WRITE]);
 		files[0] = pipe_fd[PIPE_READ];
 		i++;
@@ -80,7 +86,14 @@ int	main(
 	if (ac < 5 || !check_files(av[1]))
 		return (ft_vprintf(STDERR_FILENO, USAGE), 1);
 	infile = open_input(av[1]);
+	if (infile == -1)
+		exit(1);
 	outfile = open_output(av[ac - 1]);
+	if (outfile == -1)
+	{
+		close(infile);
+		exit(1);
+	}
 	files[0] = infile;
 	files[1] = outfile;
 	handle_pipes(ac, av, files, envp);

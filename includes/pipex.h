@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 09:55:53 by jcheron           #+#    #+#             */
-/*   Updated: 2025/01/28 09:10:14 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:17:09 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	pipex_err_file_no_exit(
 			char *filename);
 
 // read_cmd.c
-void	execute_cmd(
+int		execute_cmd(
 			char *cmd,
 			int input_fd,
 			int output_fd,
