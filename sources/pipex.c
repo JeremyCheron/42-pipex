@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 18:43:10 by jcheron           #+#    #+#             */
-/*   Updated: 2025/01/28 10:18:36 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:22:01 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	handle_pipes(
 			close(files[1]);
 			exit(1);
 		}
-
 		close(pipe_fd[PIPE_WRITE]);
 		files[0] = pipe_fd[PIPE_READ];
 		i++;
